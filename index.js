@@ -4,9 +4,11 @@ let tab = [];
 
 searchBar.addEventListener("keyup", (e) => {
     const searchString = e.target.value.toLowerCase();
-
     const filteredtitle = tab.filter((hub) => {
-        return hub.attributes.title.toLowerCase().includes(searchString);
+        return (
+            hub.attributes.title.toLowerCase().includes(searchString) ||
+            hub.attributes.category.toLowerCase().includes(searchString)
+        );
     });
     traitement(filteredtitle);
 });
@@ -24,6 +26,7 @@ fetch("https://strapi-gogokodo.herokuapp.com/api/sources")
 
 function traitement(data) {
     // le Data correspond au données que l'on récupére
+    box.innerHTML = " "; //??
     for (video of data) {
         console.log(data);
         console.log(video.attributes.title);
